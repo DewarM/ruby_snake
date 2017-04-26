@@ -15,13 +15,13 @@ class Game
   def snake_handler()
     case @cur_input
     when "LEFT"
-      move = @grid.snake.move_x(-1)
+      move = @grid.snake.move([-1,0])
       if move == nil
         @cur_input = @last_input
         snake_handler()
       end
     when "RIGHT"
-      move = @grid.snake.move_x(1)
+      move = @grid.snake.move([1,0])
       if move == nil
         @cur_input = @last_input
         snake_handler()

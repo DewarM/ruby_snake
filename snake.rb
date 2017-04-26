@@ -17,15 +17,8 @@ class Snake
     return @tail.first()[1]
   end
 
-  def move_x(amount)
-    new_pos = [x_pos() + amount, y_pos]
-    return nil if !validate_move(new_pos)
-    @tail.pop()
-    @tail.unshift(new_pos)
-  end
-
-  def move_y(amount)
-    new_pos = [x_pos(), y_pos + amount]
+  def move(move_array)
+    new_pos = [x_pos() + move_array[0], y_pos + move_array[1]]
     return nil if !validate_move(new_pos)
     @tail.pop()
     @tail.unshift(new_pos)
