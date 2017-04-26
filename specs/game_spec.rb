@@ -15,7 +15,7 @@ class GameTest < MiniTest::Test
 
   def test_game_should_have_last_input
     result = @game.cur_input
-    assert_equal("LEFT", result)
+    assert_equal(:left, result)
   end
 
   def test_game_step
@@ -29,7 +29,7 @@ class GameTest < MiniTest::Test
   end
 
   def test_snake_handler_deals_with_input_correctly__input_that_will_overlap_current_tail
-    @game.cur_input = "RIGHT"
+    @game.cur_input = :left
     @game.snake_handler()
     assert_equal(99, @snake.x_pos)
   end
