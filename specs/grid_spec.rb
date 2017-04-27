@@ -38,4 +38,14 @@ class GridTest < MiniTest::Test
     assert_equal(@test_grid.food, new_food)
   end
 
+  def test_grid_can_detect_when_food_and_snake_head_same_pos
+    snake_at_food_pos = Snake.new(50,50)
+    grid = Grid.new(100,100, snake_at_food_pos, @food)
+    assert(grid.food_snake_check)
+  end
+
+  def test_grid_detects_when_food_and_snake_are_not_at_same_pos
+    refute(@test_grid.food_snake_check)
+  end
+
 end
