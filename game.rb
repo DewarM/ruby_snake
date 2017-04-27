@@ -9,10 +9,10 @@ class Game
   end
 
   def step()
-    snake_handler()
+    input_handler()
   end
 
-  def snake_handler()
+  def input_handler()
     input_hash = {
       left: [-1,0],
       right: [1,0],
