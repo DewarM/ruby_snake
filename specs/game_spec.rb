@@ -24,13 +24,13 @@ class GameTest < MiniTest::Test
   end
 
   def test_input_handler_deals_with_input_correctly
-    @game.input_handler()
+    @game.handle_input()
     assert_equal(99, @snake.x_pos)
   end
 
   def test_input_handler_deals_with_input_correctly__input_that_will_overlap_current_tail
     @game.cur_input = :left
-    @game.input_handler()
+    @game.handle_input()
     assert_equal(99, @snake.x_pos)
   end
 
