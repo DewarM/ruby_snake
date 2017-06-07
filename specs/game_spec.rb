@@ -15,7 +15,7 @@ class GameTest < MiniTest::Test
 
   def test_game_should_have_last_input
     result = @game.cur_input
-    assert_equal(:left, result)
+    assert_nil(result)
   end
 
   def test_game_step
@@ -32,6 +32,31 @@ class GameTest < MiniTest::Test
     @game.cur_input = :left
     @game.handle_input()
     assert_equal(99, @snake.x_pos)
+  end
+
+  def test_input_handler_cant_move_right_initially_as_tail_is_in_way
+    @game.cur_input = :right
+    @game.handle_input()
+    assert_equal(100, @snake.x_pos)
+  end
+
+  def test_input_handler_deals_with_down_input
+    @game.cur_input = :down
+    @game.handle_input()
+    assert_equal(49, @snake.y_pos)
+  end
+
+  def test_input_handler_deals_with_up_input
+    @game.cur_input = :up
+    @game.handle_input()
+    assert_equal(51, @snake.y_pos)
+  end
+
+  def test_sequential_movement
+    @game.cur_input = :up
+    @game.handle_input()
+    @game.handle_input()
+    assert_equal(52, @snake.y_pos)
   end
 
 end

@@ -4,8 +4,13 @@ class Game
 
   def initialize(grid)
     @grid = grid
-    @cur_input = :left
-    @last_input = :left
+    @cur_input = nil
+    @input_hash = {
+      left: [-1,0],
+      right: [1,0],
+      up: [0,1],
+      down: [0,-1]
+    }
   end
 
   def step()
@@ -13,15 +18,10 @@ class Game
   end
 
   def handle_input()
-    input_hash = {
-      left: [-1,0],
-      right: [1,0],
-      up: [0,1],
-      down: [0,-1]
-    }
-    move = @grid.snake.move(input_hash[@cur_input])
-    if move == nil
-      @grid.snake.move(input_hash[@last_input])
+    if @cur_input == nil
+      @grid.snake.move(@input_hash[:left])
+    else
+      @grid.snake.move(@input_hash[@cur_input])
     end
   end
 
