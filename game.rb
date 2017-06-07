@@ -1,28 +1,25 @@
+require_relative("input_handler")
+
 class Game
 
   attr_accessor :cur_input
 
   def initialize(grid)
     @grid = grid
-    @cur_input = nil
-    @input_hash = {
-      left: [-1,0],
-      right: [1,0],
-      up: [0,1],
-      down: [0,-1]
-    }
+    @input_handler = InputHandler.new()
   end
 
   def step()
-    handle_input()
+    move_snake()
   end
 
-  def handle_input()
-    if @cur_input == nil
-      @grid.snake.move(@input_hash[:left])
-    else
-      @grid.snake.move(@input_hash[@cur_input])
-    end
+  def move_snake()
+    movement = @input_handler.handle_input()
+    @grid.snake.move(movement)
+  end
+
+  def set_input(input)
+    @input_handler.cur_input = input
   end
 
 end
