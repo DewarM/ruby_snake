@@ -52,11 +52,20 @@ class GameTest < MiniTest::Test
     assert_equal(51, @snake.y_pos)
   end
 
-  def test_sequential_movement
+  def test_sequential_movement_no_new_input
     @game.cur_input = :up
     @game.handle_input()
     @game.handle_input()
     assert_equal(52, @snake.y_pos)
+  end
+
+  def test_sequential_movement_with_new_input
+    @game.cur_input = :up
+    @game.handle_input()
+    @game.cur_input = :right
+    @game.handle_input()
+    assert_equal(51, @snake.y_pos)
+    assert_equal(101, @snake.x_pos)
   end
 
 end
