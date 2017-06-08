@@ -61,4 +61,9 @@ class SnakeTest < MiniTest::Test
     assert_equal([[5,7], [5,6] ,[5,5], [6,5]], @test_snake.tail)
   end
 
+  def test_snake_can_grow
+    @test_snake.grow()
+    assert_equal([[5,5], [5,5], [6,5], [7,5], [8,5]], @test_snake.tail)
+  end
+
 end

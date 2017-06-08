@@ -86,4 +86,14 @@ class GameTest < MiniTest::Test
     game.check_food_snake_overlap()
     refute_equal(food, grid.food)
   end
+
+  def test_check_food_snake_overlap_should_grow_snake_if_snake_at_food_pos()
+    snake = Snake.new(50,50)
+    food = Food.new(50,50)
+    grid = Grid.new(200, 100, snake, food)
+    game = Game.new(grid)
+    game.check_food_snake_overlap()
+    assert_equal([[50,50], [50,50], [51,50], [52,50], [53,50]], snake.tail)
+  end
+
 end

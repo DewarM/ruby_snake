@@ -22,4 +22,9 @@ class Snake
     @tail.pop()
     @tail.unshift(new_pos)
   end
+
+  def grow()
+    head = @tail.first()
+    @tail.unshift(head)
+  end
 end

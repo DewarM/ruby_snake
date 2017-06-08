@@ -24,6 +24,7 @@ class Game
   def check_food_snake_overlap()
     if @grid.food_snake_check()
       generate_food()
+      @grid.snake.grow()
     end
   end
 
