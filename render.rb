@@ -7,16 +7,20 @@ require_relative 'game'
 
 class Render < Gosu::Window
   def initialize
-    super 640, 480
-    self.caption = "Snake"
-    @snake = Snake.new(100,50)
-    @food = Food.new(50,50)
-    @grid = Grid.new(200, 100, @snake, @food)
+    @frames = 0
+    @snake = Snake.new(10,20)
+    @food = Food.new(30,30)
+    @grid = Grid.new(500, 500, @snake, @food)
     @game = Game.new(@grid)
+    super 500, 500
+    self.caption = "Snake"
   end
 
   def update
-    @game.step()
+    @frames += 1
+    if @frames % 5 == 0
+      @game.step()
+    end
     if Gosu.button_down? Gosu::KB_LEFT or Gosu::button_down? Gosu::GP_LEFT
       @game.set_input(:left)
     end
@@ -33,7 +37,10 @@ class Render < Gosu::Window
   end
 
   def draw
-    Gosu.draw_rect(@snake.x_pos, @snake.y_pos, 10, 10, Gosu::Color.argb(0xff_808080))
+    Gosu.draw_rect(@food.x_pos, @food.y_pos, 10, 10, Gosu::Color.argb(0xff_ff0000))
+    @snake.tail.each_with_index do |position, index|
+      Gosu.draw_rect(position[0]*10, position[1]*10, 10, 10, Gosu::Color.argb(0xff_808080))
+    end
   end
 
   def button_down(id)
