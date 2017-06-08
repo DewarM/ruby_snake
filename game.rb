@@ -9,6 +9,7 @@ class Game
 
   def step()
     move_snake()
+    check_food_snake_overlap()
   end
 
   def move_snake()
@@ -18,6 +19,19 @@ class Game
 
   def set_input(input)
     @input_handler.cur_input = input
+  end
+
+  def check_food_snake_overlap()
+    if @grid.food_snake_check()
+      generate_food()
+    end
+  end
+
+  def generate_food()
+    x = rand(1..@grid.x_size / 10)
+    y = rand(1..@grid.y_size / 10)
+    @grid.food = Food.new(x,y)
+
   end
 
 end

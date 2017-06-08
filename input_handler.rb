@@ -5,7 +5,7 @@ attr_accessor :cur_input
 def initialize(snake)
   @snake = snake
   @cur_input = :left
-  @last_input = nil
+  @last_input = :left
   @input_hash = {
     left: [-1,0],
     right: [1,0],

@@ -8,9 +8,9 @@ require_relative 'game'
 class Render < Gosu::Window
   def initialize
     @frames = 0
-    @snake = Snake.new(10,20)
-    @food = Food.new(30,30)
-    @grid = Grid.new(500, 500, @snake, @food)
+    snake = Snake.new(10,20)
+    food = Food.new(30,30)
+    @grid = Grid.new(500, 500, snake, food)
     @game = Game.new(@grid)
     super 500, 500
     self.caption = "Snake"
@@ -37,8 +37,8 @@ class Render < Gosu::Window
   end
 
   def draw
-    Gosu.draw_rect(@food.x_pos, @food.y_pos, 10, 10, Gosu::Color.argb(0xff_ff0000))
-    @snake.tail.each_with_index do |position, index|
+    Gosu.draw_rect(@grid.food.x_pos*10, @grid.food.y_pos*10, 10, 10, Gosu::Color.argb(0xff_ff0000))
+    @grid.snake.tail.each_with_index do |position, index|
       Gosu.draw_rect(position[0]*10, position[1]*10, 10, 10, Gosu::Color.argb(0xff_808080))
     end
   end

@@ -36,10 +36,10 @@ class GameTest < MiniTest::Test
     assert_equal(51, @snake.y_pos)
   end
 
-  def test_input_handler_cant_move_right_initially_as_tail_is_in_way
+  def test_input_handler_cant_move_right_initially_as_tail_is_in_way_still_moves_left
     @game.set_input(:right)
     @game.move_snake()
-    assert_equal(100, @snake.x_pos)
+    assert_equal(99, @snake.x_pos)
   end
 
   def test_input_handler_deals_with_down_input
@@ -70,11 +70,20 @@ class GameTest < MiniTest::Test
     assert_equal(101, @snake.x_pos)
   end
 
-  def test_sequential_movement_with_new_input_invalid_new_input
+  def test_sequential_movement_with_new_input_invalid_new_input_moves_as_last_input
     @game.set_input(:up)
     @game.move_snake()
     @game.set_input(:down)
     @game.move_snake()
-    assert_equal(51, @snake.y_pos)
+    assert_equal(52, @snake.y_pos)
+  end
+
+  def test_check_food_snake_overlap_should_create_new_food_if_snake_at_food_pos()
+    snake = Snake.new(50,50)
+    food = Food.new(50,50)
+    grid = Grid.new(200, 100, snake, food)
+    game = Game.new(grid)
+    game.check_food_snake_overlap()
+    refute_equal(food, grid.food)
   end
 end
