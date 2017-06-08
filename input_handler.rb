@@ -2,8 +2,10 @@ class InputHandler
 
 attr_accessor :cur_input
 
-def initialize()
-  @cur_input = nil
+def initialize(snake)
+  @snake = snake
+  @cur_input = :left
+  @last_input = nil
   @input_hash = {
     left: [-1,0],
     right: [1,0],
@@ -13,10 +15,18 @@ def initialize()
 end
 
 def handle_input()
-  if @cur_input == nil
-    return @input_hash[:left]
+    move_array = @input_hash[@cur_input]
+    return validate_move(move_array)
+end
+
+def validate_move(move_array)
+  new_pos = @snake.x_pos() + move_array[0], @snake.y_pos + move_array[1]
+
+  if @snake.tail.include?(new_pos)
+    return @input_hash[@last_input]
   else
-    return @input_hash[@cur_input]
+    @last_input = @cur_input
+    return move_array
   end
 end
 

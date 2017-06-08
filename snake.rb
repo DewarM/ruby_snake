@@ -19,13 +19,13 @@ class Snake
 
   def move(move_array)
     new_pos = [x_pos() + move_array[0], y_pos + move_array[1]]
-    return nil if !validate_move(new_pos)
+    # return nil if !validate_move(new_pos)
     @tail.pop()
     @tail.unshift(new_pos)
   end
 
-  def validate_move(new_pos)
-    return !@tail.include?(new_pos)
-  end
+  # def validate_move(new_pos)
+  #   return !@tail.include?(new_pos)
+  # end
 
 end

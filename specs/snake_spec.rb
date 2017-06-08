@@ -36,8 +36,8 @@ class SnakeTest < MiniTest::Test
   end
 
   def test_snake_can_move_in_x_direction__tail_is_correct()
-    @test_snake.move([1,0])
-    assert_equal([[5,5], [6,5], [7,5], [8,5]], @test_snake.tail)
+    @test_snake.move([0,1])
+    assert_equal([[5,6], [5,5], [6,5], [7,5]], @test_snake.tail)
   end
 
   def test_snake_can_move_in_y_direction()
@@ -57,8 +57,8 @@ class SnakeTest < MiniTest::Test
 
   def test_snake_can_move_multiple_times_with_correct_tail()
     @test_snake.move([0,1])
-    @test_snake.move([0,-1])
-    assert_equal([[5,6] ,[5,5], [6,5], [7,5]], @test_snake.tail)
+    @test_snake.move([0,1])
+    assert_equal([[5,7], [5,6] ,[5,5], [6,5]], @test_snake.tail)
   end
 
 end

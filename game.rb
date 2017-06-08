@@ -2,11 +2,9 @@ require_relative("input_handler")
 
 class Game
 
-  attr_accessor :cur_input
-
   def initialize(grid)
     @grid = grid
-    @input_handler = InputHandler.new()
+    @input_handler = InputHandler.new(@grid.snake)
   end
 
   def step()
