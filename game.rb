@@ -46,8 +46,8 @@ class Game
   end
 
   def generate_food()
-    x = rand(1..@grid.x_size / 10)
-    y = rand(1..@grid.y_size / 10)
+    x = rand(1...@grid.x_size / 10)
+    y = rand(1...@grid.y_size / 10)
     @grid.food = Food.new(x,y)
   end
 
