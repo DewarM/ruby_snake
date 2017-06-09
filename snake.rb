@@ -27,4 +27,8 @@ class Snake
     head = @tail.first()
     @tail.unshift(head)
   end
+
+  def head
+    return @tail.first
+  end
 end

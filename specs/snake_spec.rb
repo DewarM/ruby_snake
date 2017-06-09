@@ -66,4 +66,9 @@ class SnakeTest < MiniTest::Test
     assert_equal([[5,5], [5,5], [6,5], [7,5], [8,5]], @test_snake.tail)
   end
 
+  def test_snake_can_get_head
+    head = @test_snake.head()
+    assert_equal([5,5], head)
+  end
+
 end

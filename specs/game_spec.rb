@@ -96,4 +96,38 @@ class GameTest < MiniTest::Test
     assert_equal([[50,50], [50,50], [51,50], [52,50], [53,50]], snake.tail)
   end
 
+  def test_game_has_collision_detector
+    refute_nil(@game.detector)
+  end
+
+  def test_game_collision_detector_should_add_tail_of_snake
+    assert_equal(@game.detector.collision_pos, @snake.tail[1..@grid.snake.tail.length])
+  end
+
+  def test_update_collision_detector_should_update_with_new_snake_position
+    @game.move_snake()
+    @game.update_collision_detector()
+    assert_equal(@game.detector.collision_pos, [[100,50], [101,50], [102,50]])
+  end
+
+  def test_update_collision_detector_should_update_with_new_snake_position_and_can_then_check
+    @game.move_snake()
+    @game.update_collision_detector()
+    assert_equal(@game.detector.check([100,50]), true)
+  end
+
+  def test_game_check_if_snake_hits_snake()
+    snake = Snake.new(50,50)
+    snake.tail = [[54,50], [50,50], [51,50], [52,50], [53,50], [54,50], [55,50]]
+    food = Food.new(50,50)
+    grid = Grid.new(200, 100, snake, food)
+    game = Game.new(grid)
+
+
+
+    result = game.check_snake_snake_overlap()
+    assert(result)
+
+  end
+
 end
