@@ -4,19 +4,21 @@ require_relative("collision_detector")
 
 class Game
 
-  attr_reader :detector
+  attr_reader :detector, :game_status
 
   def initialize(grid)
     @grid = grid
     @input_handler = InputHandler.new(@grid.snake)
     @detector = CollisionDetector.new()
     @detector.add(@grid.snake.tail[1..@grid.snake.tail.length])
+    @game_status = true
   end
 
   def step()
     move_snake()
     check_food_snake_overlap()
-    # update_collision_detector()
+    update_collision_detector()
+    @game_status = false if check_snake_snake_overlap()
   end
 
   def move_snake()
@@ -53,7 +55,7 @@ class Game
 
   def update_collision_detector()
     @detector.clear()
-    @detector.add(@grid.snake.tail[1..@grid.snake.tail.length])
+    @detector.add(@grid.snake.tail[2..@grid.snake.tail.length])
   end
 
 end

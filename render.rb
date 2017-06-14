@@ -9,15 +9,16 @@ class Render < Gosu::Window
   def initialize
     @frames = 0
     snake = Snake.new(10,20)
-    food = Food.new(30,30)
-    @grid = Grid.new(500, 500, snake, food)
+    food = Food.new(20,20)
+    @grid = Grid.new(250, 250, snake, food)
     @game = Game.new(@grid)
-    super 500, 500
+    super 250, 250
     self.caption = "Snake"
   end
 
   def update
     @frames += 1
+    return if !@game.game_status
     if @frames % 5 == 0
       @game.step()
     end
